@@ -63,6 +63,7 @@ router.post("/", ({ body }, res) => {
 });
 // router.post("/login");
 // router.post("logout");
+
 router.put("/:id", ({ body, params }, res) => {
     User.update(body, {
         individualHooks: true,
