@@ -1,17 +1,10 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
 const { Post, User, Comment } = require("../../models");
-const { post } = require("./user-routes");
 
 router.get("/", (req, res) => {
     Post.findAll({
-        attributes: [
-            "id",
-            "post_url",
-            "title",
-            "created_at",
-            [(sequelize.literal("(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"), "vote_count")],
-        ],
+        attributes: ["id", "post_url", "title", "created_at"],
         order: [["created_at", "DESC"]],
         include: [
             {
@@ -30,6 +23,7 @@ router.get("/", (req, res) => {
     })
         .then((postData) => res.json(postData))
         .catch((err) => {
+            console.log(err);
             res.status(500).json(err);
         });
 });
@@ -74,25 +68,23 @@ router.post("/", ({ body }, res) => {
         .catch((err) => res.status(500).json(err));
 });
 
-router.put("/:id", (req, res) => {
-    if (req.session) {
-        Post.update(
-            {
-                title: req.body.title,
-            },
-            {
-                where: { id: req.params.id },
+router.put("/:id", ({ body, params }, res) => {
+    Post.update(
+        {
+            title: body.title,
+        },
+        {
+            where: { id: params.id },
+        }
+    )
+        .then((postData) => {
+            if (!postData) {
+                res.status(404).json({ message: "No post found with this id!" });
+                return;
             }
-        )
-            .then((postData) => {
-                if (!postData) {
-                    res.status(404).json({ message: "No post found with this id!" });
-                    return;
-                }
-                res.json(postData);
-            })
-            .catch((err) => res.status(500).json(err));
-    }
+            res.json(postData);
+        })
+        .catch((err) => res.status(500).json(err));
 });
 
 router.delete("/:id", ({ params }, res) => {
