@@ -1,11 +1,11 @@
-<ol>
-    <li>
-        <article>
-            <div class="title">{{!title}}</div>
-            <div class="meta">
-                {{!posted by}}
-            </div>
-            <div class="description">{{!desc}}</div>
-        </article>
-    </li>
-</ol>
+<ul>
+    {{#each posts}}
+        <li>
+            <article>
+                <div class="title">{{title}}</div>
+                <div class="meta">By user {{user.username}} on {{created_at}}</div>
+                <div class="url">{{post_url}}</div>
+            </article>
+        </li>
+    {{/each}}
+</ul>

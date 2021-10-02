@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: #fff1d0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 header {
     padding: 1em;
@@ -21,7 +22,6 @@ nav {
 header a {
     text-decoration: none;
     color: #fbe474;
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: lighter;
     font-size: 1em;
     letter-spacing: 3px;
@@ -31,8 +31,19 @@ header h1 {
     margin-top: 1.5em;
     margin-bottom: 1em;
     color: #fbe474;
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 2em;
     letter-spacing: 0.25em;
+}
+
+/* article {
+} */
+
+.title {
+    font-size: larger;
+}
+
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
 }
