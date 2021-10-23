@@ -1,0 +1,21 @@
+<h1>Dashboard</h1>
+<ul>
+    {{#each user.posts}}
+        <li>
+            <div>{{title}}</div>
+            <div>{{content}}</div>
+            <div>Created on {{created_at}}</div>
+        </li>
+    {{/each}}
+
+</ul>
+
+<form id="new-post">
+    <label>Title: </label>
+    <input type="text" id="title" />
+    <label>Content: </label>
+    <textarea cols="10" rows="5" id="content"></textarea>
+    <button type="submit" style="cursor: pointer;">Add Post</button>
+</form>
+
+<script src="/javascript/newpost.js"></script>

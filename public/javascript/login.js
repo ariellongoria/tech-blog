@@ -18,7 +18,7 @@ async function signupFormHandler(event) {
             },
         });
         if (response.ok) {
-            console.log("success");
+            document.location.replace("/");
         } else {
             response.statusText;
         }
@@ -29,7 +29,7 @@ async function loginFormHandler(event) {
     event.preventDefault();
 
     const email = document.querySelector("#login-email").value.trim();
-    const password = document.querySelector("#login-password").value.trime();
+    const password = document.querySelector("#login-password").value.trim();
 
     if (email && password) {
         const response = await fetch("api/users/login", {

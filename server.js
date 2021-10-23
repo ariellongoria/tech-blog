@@ -15,10 +15,26 @@ const hbs = exphbs.create({});
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
+const session = require("express-session");
+
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+
+// session
+const sess = {
+    secret: process.env.SECRET,
+    cookie: {},
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+        db: sequelize,
+    }),
+};
+
 // add middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(session(sess));
 
 // turn on routes
 app.use(routes);
@@ -30,35 +46,35 @@ sequelize.sync({ force: false }).then(() => {
 
 // GIVEN a CMS-style blog site
 
-// TODO:
+// DONE:
 // WHEN I visit the site for the first time
 // THEN I am presented with the homepage, which includes existing blog posts if any have been posted; navigation links for the homepage and the dashboard; and the option to log in
 
-// TODO:
+// DONE:
 // WHEN I click on the homepage option
 // THEN I am taken to the homepage
 
-// TODO:
+// DONE:
 // WHEN I click on any other links in the navigation
 // THEN I am prompted to either sign up or sign in
 
-// TODO:
+// DONE:
 // WHEN I choose to sign up
 // THEN I am prompted to create a username and password
 
-// TODO:
+// DONE:
 // WHEN I click on the sign-up button
 // THEN my user credentials are saved and I am logged into the site
 
-// TODO:
+// DONE:
 // WHEN I revisit the site at a later time and choose to sign in
 // THEN I am prompted to enter my username and password
 
-// TODO:
+// DONE:
 // WHEN I am signed in to the site
 // THEN I see navigation links for the homepage, the dashboard, and the option to log out
 
-// TODO:
+// DONE:
 // WHEN I click on the homepage option in the navigation
 // THEN I am taken to the homepage and presented with existing blog posts that include the post title and the date created
 

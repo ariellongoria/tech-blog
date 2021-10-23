@@ -10,13 +10,23 @@
         <header>
             <nav>
                 <a href="/">HOME</a>
-                <a href="/dashboard">DASHBOARD</a>
-                <div id="log-in-link">
-                    <a href="/login">LOG IN</a>
-                </div>
+                {{#if loggedIn}}
+                    <a href="/dashboard">DASHBOARD</a>
+                    <div id="log-in-link">
+                        <a href="/login">LOG OUT</a>
+                    </div>
+                {{else}}
+                    <a href="/login">DASHBOARD</a>
+                    <div id="log-in-link">
+                        <a href="/login">LOG IN</a>
+                    </div>
+                {{/if}}
             </nav>
             <h1>TECH BLOG</h1>
         </header>
         {{{body}}}
+        {{#if loggedIn}}
+            <script src="/javascript/logout.js"></script>
+        {{/if}}
     </body>
 </html>

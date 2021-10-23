@@ -2,9 +2,10 @@
     {{#each posts}}
         <li>
             <article>
-                <div class="title">{{title}}</div>
-                <div class="meta">By user {{user.username}} on {{created_at}}</div>
-                <div class="url">{{post_url}}</div>
+                <div class="title">
+                    <a href="/post/{{id}}">{{title}}</a>
+                </div>
+                <div class="meta">Created on {{created_at}}</div>
             </article>
         </li>
     {{/each}}
